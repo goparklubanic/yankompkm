@@ -1,0 +1,285 @@
+object Form1: TForm1
+  Left = 325
+  Height = 546
+  Top = 161
+  Width = 842
+  BorderIcons = [biSystemMenu, biMinimize]
+  Caption = 'YANKOMPKM'
+  ClientHeight = 546
+  ClientWidth = 842
+  OnActivate = FormActivate
+  OnResize = FormResize
+  Position = poDesktopCenter
+  LCLVersion = '1.6.0.4'
+  object Panel1: TPanel
+    Left = 0
+    Height = 40
+    Top = 0
+    Width = 842
+    Align = alTop
+    ClientHeight = 40
+    ClientWidth = 842
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 1
+      Height = 38
+      Top = 1
+      Width = 840
+      Align = alClient
+      Alignment = taCenter
+      Caption = 'LAYANAN KOMUNIKASI PUSKESMAS PEJAWARAN'
+      Font.Height = -24
+      Font.Name = 'Sans'
+      ParentColor = False
+      ParentFont = False
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 480
+    Top = 40
+    Width = 304
+    Align = alLeft
+    Caption = 'Panel2'
+    ClientHeight = 480
+    ClientWidth = 304
+    TabOrder = 1
+    object DBGrid1: TDBGrid
+      Left = 1
+      Height = 437
+      Top = 16
+      Width = 302
+      Align = alClient
+      Color = clWindow
+      Columns = <>
+      DataSource = dsNumbers
+      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
+      TabOrder = 0
+      OnCellClick = DBGrid1CellClick
+    end
+    object Label3: TLabel
+      Left = 1
+      Height = 15
+      Top = 1
+      Width = 302
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'DAFTAR NOMOR PENGIRIM'
+      Font.Height = -13
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object Edit2: TEdit
+      Left = 1
+      Height = 26
+      Top = 453
+      Width = 302
+      Align = alBottom
+      OnKeyUp = Edit2KeyUp
+      TabOrder = 1
+    end
+  end
+  object Panel3: TPanel
+    Left = 304
+    Height = 480
+    Top = 40
+    Width = 538
+    Align = alClient
+    ClientHeight = 480
+    ClientWidth = 538
+    TabOrder = 2
+    object Label2: TLabel
+      Left = 16
+      Height = 14
+      Top = 16
+      Width = 97
+      Caption = 'Nomor Pengirim'
+      ParentColor = False
+    end
+    object Edit1: TEdit
+      Left = 136
+      Height = 26
+      Top = 8
+      Width = 248
+      TabOrder = 0
+      Text = 'Edit1'
+    end
+    object Memo1: TMemo
+      Left = 16
+      Height = 56
+      Top = 312
+      Width = 496
+      Lines.Strings = (
+        ''
+      )
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object Button1: TButton
+      Left = 16
+      Height = 33
+      Top = 440
+      Width = 104
+      Caption = 'Kirim / Balas'
+      OnClick = Button1Click
+      TabOrder = 2
+    end
+    object Button2: TButton
+      Left = 128
+      Height = 33
+      Top = 440
+      Width = 104
+      Caption = 'Hapus Pesan'
+      OnClick = Button2Click
+      TabOrder = 3
+    end
+    object Button3: TButton
+      Left = 240
+      Height = 33
+      Top = 440
+      Width = 104
+      Caption = 'Hapus Nomor'
+      OnClick = Button3Click
+      TabOrder = 4
+    end
+    object DBGrid2: TDBGrid
+      Left = 16
+      Height = 272
+      Top = 40
+      Width = 496
+      Color = clWindow
+      Columns = <>
+      DataSource = dsMessages
+      TabOrder = 5
+      OnCellClick = DBGrid2CellClick
+    end
+    object Memo2: TMemo
+      Left = 16
+      Height = 56
+      Top = 376
+      Width = 496
+      MaxLength = 160
+      TabOrder = 6
+    end
+    object Label4: TLabel
+      Left = 408
+      Height = 14
+      Top = 16
+      Width = 52
+      Caption = 'ID Pesan'
+      ParentColor = False
+    end
+    object Label5: TLabel
+      Left = 504
+      Height = 14
+      Top = 16
+      Width = 8
+      Alignment = taRightJustify
+      Caption = '0'
+      ParentColor = False
+    end
+    object Button4: TButton
+      Left = 352
+      Height = 33
+      Top = 440
+      Width = 160
+      Caption = 'Pesan Terkirim'
+      OnClick = Button4Click
+      TabOrder = 7
+    end
+  end
+  object Panel4: TPanel
+    Left = 0
+    Height = 26
+    Top = 520
+    Width = 842
+    Align = alBottom
+    ClientHeight = 26
+    ClientWidth = 842
+    TabOrder = 3
+    object StatusBar1: TStatusBar
+      Left = 1
+      Height = 16
+      Top = 9
+      Width = 840
+      Panels = <>
+    end
+  end
+  object tconn55: TMySQL55Connection
+    Connected = True
+    LoginPrompt = False
+    DatabaseName = 'sms'
+    KeepConnection = False
+    Password = 'pengumuman'
+    Transaction = sqtrx
+    UserName = 'berita'
+    HostName = 'localhost'
+    Options = []
+    left = 288
+    top = 88
+  end
+  object qrySenders: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
+    FieldDefs = <    
+      item
+        Name = 'SenderNumber'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+      end>
+    Active = True
+    Database = tconn55
+    Transaction = sqtrx
+    SQL.Strings = (
+      'SELECT DISTINCT(SenderNumber) FROM inbox LIMIT 150'
+    )
+    Options = []
+    Params = <>
+    left = 132
+    top = 109
+  end
+  object sqtrx: TSQLTransaction
+    Active = True
+    Database = tconn55
+    Options = []
+    left = 288
+    top = 144
+  end
+  object dsNumbers: TDataSource
+    AutoEdit = False
+    DataSet = qrySenders
+    left = 132
+    top = 160
+  end
+  object qryMessages: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
+    FieldDefs = <    
+      item
+        Name = 'Waktu'
+        DataType = ftDateTime
+        Precision = -1
+      end    
+      item
+        Name = 'pesan'
+        DataType = ftString
+        Precision = -1
+        Size = 160
+      end>
+    Active = True
+    Database = tconn55
+    Transaction = sqtrx
+    SQL.Strings = (
+      'SELECT ReceivingDateTime AS Waktu ,TextDecoded AS pesan FROM inbox LIMIT 50'
+    )
+    Options = []
+    Params = <>
+    left = 423
+    top = 117
+  end
+  object dsMessages: TDataSource
+    DataSet = qryMessages
+    left = 531
+    top = 123
+  end
+end

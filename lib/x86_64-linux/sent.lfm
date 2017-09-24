@@ -1,0 +1,120 @@
+object Form2: TForm2
+  Left = 332
+  Height = 543
+  Top = 105
+  Width = 842
+  BorderIcons = [biSystemMenu, biMinimize]
+  Caption = 'Pesan Terkirim'
+  ClientHeight = 543
+  ClientWidth = 842
+  OnResize = FormResize
+  Position = poDesktopCenter
+  LCLVersion = '1.6.0.4'
+  object Panel1: TPanel
+    Left = 0
+    Height = 50
+    Top = 0
+    Width = 842
+    Align = alTop
+    ClientHeight = 50
+    ClientWidth = 842
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 25
+      Height = 14
+      Top = 16
+      Width = 124
+      Caption = 'Cari Nomor Pengirim'
+      ParentColor = False
+    end
+    object Edit1: TEdit
+      Left = 168
+      Height = 26
+      Top = 8
+      Width = 256
+      OnKeyUp = Edit1KeyUp
+      TabOrder = 0
+    end
+    object Button1: TButton
+      Left = 752
+      Height = 25
+      Top = 8
+      Width = 75
+      Caption = 'Tutup'
+      OnClick = Button1Click
+      TabOrder = 1
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 36
+    Top = 507
+    Width = 842
+    Align = alBottom
+    Caption = 'Panel2'
+    TabOrder = 1
+  end
+  object Panel3: TPanel
+    Left = 0
+    Height = 457
+    Top = 50
+    Width = 842
+    Align = alClient
+    Caption = 'Panel3'
+    ClientHeight = 457
+    ClientWidth = 842
+    TabOrder = 2
+    object DBGrid1: TDBGrid
+      Left = 1
+      Height = 455
+      Top = 1
+      Width = 840
+      Align = alClient
+      Color = clWindow
+      Columns = <>
+      DataSource = dsSentItem
+      TabOrder = 0
+    end
+  end
+  object dsSentItem: TDataSource
+    DataSet = qrySentitem
+    left = 383
+    top = 172
+  end
+  object qrySentitem: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'DeliveryDateTime'
+        DataType = ftDateTime
+        Precision = -1
+      end    
+      item
+        Name = 'DestinationNumber'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+      end    
+      item
+        Name = 'TextDecoded'
+        DataType = ftString
+        Precision = -1
+        Size = 160
+      end>
+    Active = True
+    Database = Form1.tconn55
+    Transaction = Form1.sqtrx
+    SQL.Strings = (
+      'select ID,DeliveryDateTime,DestinationNumber,TextDecoded from sentitems ORDER BY ID;'
+    )
+    Options = []
+    Params = <>
+    left = 384
+    top = 119
+  end
+end
